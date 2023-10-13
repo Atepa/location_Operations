@@ -74,20 +74,16 @@ exports.put_data=async function(req,res){
 
 exports.post_distance=async function(req,res){
 
-    const locationLatitude=req.body.locationLatitude;
-    const locationLongitude=req.body.locationLongitude;
-
     const {error}=ValidateLatitudesLongitudes.validateSourceLatitudesLongitudes(req.body);
-
     if(error){
         return res.status(400).send(error.details[0].message);
     }
 
     const locations= await locationModel.find();
-    console.log(typeof req.body, typeof locations);
     if(!locations){
         return res.status(400).send("There is no location!");
     }
+
     const routes=distanceMeter(req.body,locations);
 
     
