@@ -1,7 +1,8 @@
 const express = require("express");
 const locationModel=require("../Models/locationModel");
 const validate=require("../validation/ValidateLocation");
-
+const ValidateLatitudesLongitudes=require("../validation/ValidateLatitudesLongitudes");
+const distanceMeter=require("../helpers/distance-meter");
 
 exports.get_all_data=async function(req,res){
     const locations= await locationModel.find();
@@ -19,8 +20,9 @@ exports.get_one_data=async function(req,res){
 
 exports.post_data=async function(req,res){
 
+    console.log(req.body);
     const {error}=validate.ValidateLocation(req.body);
-
+    
     if(error){
         return res.status(400).send(error.details[0].message);
     }
@@ -71,5 +73,24 @@ exports.put_data=async function(req,res){
 };
 
 exports.post_distance=async function(req,res){
+
+    const locationLatitude=req.body.locationLatitude;
+    const locationLongitude=req.body.locationLongitude;
+
+    const {error}=ValidateLatitudesLongitudes.validateSourceLatitudesLongitudes(req.body);
+
+    if(error){
+        return res.status(400).send(error.details[0].message);
+    }
+
+    const locations= await locationModel.find();
+    console.log(typeof req.body, typeof locations);
+    if(!locations){
+        return res.status(400).send("There is no location!");
+    }
+    const routes=distanceMeter(req.body,locations);
+
+    
+    res.send("başarılı");
 
 };
