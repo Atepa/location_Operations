@@ -4,7 +4,7 @@ const port=3000;
 
 const routes=require("./routes/routes");
 const db=require("./data/db");
-const rateLimit=require("./rate-limit");
+const rateLimit=require("./middleware/rate-limit");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));

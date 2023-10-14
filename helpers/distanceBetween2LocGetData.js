@@ -1,3 +1,4 @@
+const absRoundNumber=require("./abs-round-number");
 
 module.exports=function distanceBetween2LocGetData(sourceLocation,locations){
 
@@ -6,15 +7,17 @@ module.exports=function distanceBetween2LocGetData(sourceLocation,locations){
  
     for(let i=0;i<routeLenght;i++){
 
-        let x=locations[i].locationLongitude - sourceLocation.locationLongitude;
-        let y=locations[i].locationLatitude - sourceLocation.locationLatitude;
+        let x=Math.abs(locations[i].locationLongitude - sourceLocation.locationLongitude);
+        let y=Math.abs(locations[i].locationLatitude - sourceLocation.locationLatitude);
        
 
         x=x ** 2; 
-        y=y**2;
+        y=y ** 2;
 
         let distance=Math.sqrt(x+y);
-
+        const sourceLocationData=absRoundNumber(locations[i].locationLatitude,locations[i].locationLongitude);
+        const sourceLocationLatitude=sourceLocationData[0];
+        const sourceLocationLongitude=sourceLocationData[1];
         locationDrawRoute.push(
             {
             id:locations[i].id,
@@ -22,10 +25,8 @@ module.exports=function distanceBetween2LocGetData(sourceLocation,locations){
             locationTitle:locations[i].locationTitle,
 
             // for example= 68 = 70  and 62 = 60
-            locationLatitude:Math.round( (locations[i].locationLatitude<0)? (18 + Math.abs(Math.round(Math.abs(locations[i].locationLatitude) / 10) +1 )) : (Math.abs(Math.round(Math.abs(locations[i].locationLatitude) / 10) +1 ))),  
-
-            locationLongitude:Math.round( (locations[i].locationLongitude<0)? (Math.abs(Math.round(Math.abs(locations[i].locationLongitude)/10)) +1 ):(8 + ( Math.round(locations[i].locationLongitude / 10)  ))),   
-     
+            locationLatitude:sourceLocationLatitude,  
+            locationLongitude:sourceLocationLongitude,  
         }); 
 
     }
