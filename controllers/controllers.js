@@ -3,15 +3,24 @@ const locationModel=require("../Models/locationModel");
 const validate=require("../validation/ValidateLocation");
 const ValidateLatitudesLongitudes=require("../validation/ValidateLatitudesLongitudes");
 const distanceMeter=require("../helpers/distance-meter");
+const drawLoc=require("../helpers/draw-route");
+
 
 exports.get_all_data=async function(req,res){
     const locations= await locationModel.find();
+
+    if(!locations){
+        return res.status(400).send("There is no location!");
+    }
+
     res.send(locations);
 };
 
 exports.get_one_data=async function(req,res){
+
     const id=req.params.id;
     const location= await locationModel.findById(id);
+
     if(!location){
         return res.status(404).send("There is no location! Wrong Id!");
     }
@@ -20,7 +29,6 @@ exports.get_one_data=async function(req,res){
 
 exports.post_data=async function(req,res){
 
-    console.log(req.body);
     const {error}=validate.ValidateLocation(req.body);
     
     if(error){
@@ -86,7 +94,26 @@ exports.post_distance=async function(req,res){
 
     const routes=distanceMeter(req.body,locations);
 
-    
-    res.send("başarılı");
+    res.send( Array.from(routes));
+
+};
+
+exports.post_draw_route=async function(req,res){
+
+    const {error}=ValidateLatitudesLongitudes.validateSourceLatitudesLongitudes(req.body);
+    if(error){
+        return res.status(400).send(error.details[0].message);
+    }
+
+    const locations= await locationModel.find();
+    if(!locations){
+        return res.status(400).send("There is no location!");
+    }
+
+    const routes=drawLoc(req.body,locations);
+
+
+
+    res.send( Array.from(routes));
 
 };

@@ -14,4 +14,7 @@ router.post("/",controller.post_data);
 
 router.post("/distance",controller.post_distance);
 
+router.post("/draw",controller.post_draw_route);
+
+
 module.exports = router;
