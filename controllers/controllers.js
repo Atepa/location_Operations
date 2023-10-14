@@ -36,8 +36,8 @@ exports.post_data=async function(req,res){
     }
 
     const loc=new locationModel({
-        locationLatitude:req.body.locationLatitude,
-        locationLongitude:req.body.locationLongitude,
+        locationLatitude:req.body.locationLatitude.toFixed(4),
+        locationLongitude:req.body.locationLongitude.toFixed(4),
         locationTitle:req.body.locationTitle,
         colorOfMark:req.body.colorOfMark
     });
@@ -66,8 +66,8 @@ exports.put_data=async function(req,res){
         return res.status(400).send(error.details[0].message);
     }
     
-    location.locationLatitude = req.body.locationLatitude;
-    location.locationLongitude = req.body.locationLongitude,
+    location.locationLatitude = req.body.locationLatitude.toFixed(4);
+    location.locationLongitude = req.body.locationLongitude.toFixed(4),
     location.locationTitle = req.body.locationTitle,
     location.colorOfMark = req.body.colorOfMark
 
@@ -114,6 +114,6 @@ exports.post_draw_route=async function(req,res){
 
 
 
-    res.send( Array.from(routes));
+    res.send(routes);
 
 };
