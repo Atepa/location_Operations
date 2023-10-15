@@ -6,10 +6,9 @@ module.exports = function draw(sourceLocation,drawPoint)
     const sourceLocationData=absRoundNumber(sourceLocation.locationLatitude,sourceLocation.locationLongitude);
     const sourceLocationLatitude=sourceLocationData[0];
     const sourceLocationLongitude=sourceLocationData[1];
-    // console.log(sourceLocationLatitude,sourceLocationLongitude);
+
     const length= +drawPoint.length + 1;
 
-    console.log(drawPoint);
     let map="";
 
     for(let y=0;y<=36;y++){      //for y axis
@@ -35,10 +34,6 @@ module.exports = function draw(sourceLocation,drawPoint)
                 }
              }
              map+=" - ";   
-
-            //  if(index!=0){
-            //     map=map.slice(2, -1);
-            //  }
               
         }
     map+="\n";
