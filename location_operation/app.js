@@ -8,14 +8,14 @@ const app=express();
 const port=process.env.PORT;
 
 const routes=require("./routes/routes");
-const db=require("./data/db");
+const db=require("./database/database");
 const rateLimit=require("./middleware/rate-limit");
-const globalError=require("./middleware/globalError");
-
+const globalError=require("./middleware/global-error");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(rateLimit);
+
 
 app.use("/",routes);
 app.use("*",(req,res)=>{

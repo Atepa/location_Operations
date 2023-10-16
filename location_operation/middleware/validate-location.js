@@ -1,7 +1,7 @@
-const validate=require("../validation/ValidateLocation");
-const ValidateLatitudesLongitudes=require("../validation/ValidateLatitudesLongitudes");
+const validate=require("../validation/Validate-location");
 
 module.exports=function(req,res,next){
+
     const {error}=validate.ValidateLocation(req.body);
 
     if(error){

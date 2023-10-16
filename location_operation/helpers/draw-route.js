@@ -1,4 +1,4 @@
-const distanceBetween2LocGetData=require("./distanceBetween2LocGetData");
+const distanceBetween2LocGetData=require("./distance-between-2-loc-get-data");
 const drawHelper=require("./draw-helper");
 
 

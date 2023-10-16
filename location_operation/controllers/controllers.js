@@ -1,12 +1,11 @@
 require('express-async-errors');
 
-const locationModel=require("../models/locationModel");
-
+const locationModel=require("../models/location-model");
 const distanceMeter=require("../helpers/distance-meter");
 const drawLoc=require("../helpers/draw-route");
 
 
-exports.get_all_data=async function(req,res,next){
+exports.get_all_data=async function(req,res){
         
     const locations= await locationModel.find();
     if(!locations){
@@ -17,7 +16,7 @@ exports.get_all_data=async function(req,res,next){
 
 };
 
-exports.get_one_data=async function(req,res,next){
+exports.get_one_data=async function(req,res){
     
     const id = req.params.id;
 
@@ -28,7 +27,7 @@ exports.get_one_data=async function(req,res,next){
     res.send(location);
 };
 
-exports.post_data=async function(req,res,next){
+exports.post_data=async function(req,res){
 
     const loc=new locationModel({
         locationLatitude:req.body.locationLatitude.toFixed(4),
@@ -42,14 +41,9 @@ exports.post_data=async function(req,res,next){
 
 };
 
-exports.put_data=async function(req,res,next){
+exports.put_data=async function(req,res){
 
     const id=req.params.id;
-    
-    const {error} = validate.ValidateLocation(req.body);
-    if(error){
-        return res.status(400).send(error.details[0].message);
-    }
 
     const location = await locationModel.findById(id);
     if(!location){
@@ -66,31 +60,23 @@ exports.put_data=async function(req,res,next){
 
 };
 
-exports.post_distance=async function(req,res,next){
-
-    const {error}=ValidateLatitudesLongitudes.validateSourceLatitudesLongitudes(req.body);
-    if(error){
-        return res.status(400).send(error.details[0].message);
-    }
+exports.post_distance=async function(req,res){
 
     const locations= await locationModel.find();
     if(!locations){
         return res.status(400).send("There is no location!");
     }
-
     const routes=distanceMeter(req.body,locations);
+
     const routesObj = Object.fromEntries(routes);
+
     res.send(routesObj);
 
 
 };
 
-exports.post_draw_route=async function(req,res,next){
+exports.post_draw_route=async function(req,res){
 
-    const {error}=ValidateLatitudesLongitudes.validateSourceLatitudesLongitudes(req.body);
-    if(error){
-        return res.status(400).send(error.details[0].message);
-    }
     const locations= await locationModel.find();
     if(!locations){
         return res.status(400).send("There is no location!");
