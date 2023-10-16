@@ -1,0 +1,2 @@
+Get Docker İmages: docker pull atepayasin/loc_op:latest
+Can Review Url: https://hub.docker.com/repository/docker/atepayasin/loc_op/tags?page=1&ordering=last_updated Or https://hub.docker.com/u/atepayasin
