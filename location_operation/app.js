@@ -9,8 +9,8 @@ const port = process.env.PORT;
 
 const routes = require('./routes/routes');
 const db = require('./database/database');
-const rateLimit = require('./middleware/rate-limit');
-const globalError = require('./middleware/global-error');
+const rateLimit = require('./middleware/rateLimit');
+const globalError = require('./middleware/globalError');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

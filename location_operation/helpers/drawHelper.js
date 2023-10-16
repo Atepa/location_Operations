@@ -1,4 +1,4 @@
-const absRoundNumber = require('./abs-round-number');
+const absRoundNumber = require('./absRoundNumber');
 
 module.exports = function draw(sourceLocation, drawPoint) {
   const sourceLocationData = absRoundNumber(

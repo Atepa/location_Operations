@@ -1,4 +1,4 @@
-const distanceBetween2Loc = require('./distance-between-2-loc');
+const distanceBetween2Loc = require('./distanceBetween2Loc');
 
 module.exports = function distanceMeter(sourceLocation, locations) {
   // get the distance to other location from the source location

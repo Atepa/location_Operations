@@ -1,4 +1,4 @@
-const absRoundNumber = require('./abs-round-number');
+const absRoundNumber = require('./absRoundNumber');
 
 module.exports = function distanceBetween2LocGetData(sourceLocation, locations) {
   const routeLenght = Object.values(locations).length;

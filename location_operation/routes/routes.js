@@ -1,20 +1,20 @@
 const express = require('express');
 
 const router = express.Router();
-const validate = require('../middleware/validate-location');
-const validateXY = require('../middleware/validate-xy');
+const validate = require('../middleware/validateLocation');
+const validateXY = require('../middleware/validateXY');
 const controller = require('../controllers/controllers');
 
-router.get('/location/:id', controller.get_one_data);
+router.get('/location/:id', controller.getOnedata);
 
-router.get('/location', controller.get_all_data);
+router.get('/location', controller.getAllData);
 
-router.post('/location', validate, controller.post_data);
+router.post('/location', validate, controller.postData);
 
-router.post('/distance', validateXY, controller.post_distance);
+router.post('/distance', validateXY, controller.postDistance);
 
-router.post('/draw', validateXY, controller.post_draw_route);
+router.post('/draw', validateXY, controller.postDrawRoute);
 
-router.put('/location/:id', validate, controller.put_data);
+router.put('/location/:id', validate, controller.putData);
 
 module.exports = router;

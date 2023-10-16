@@ -1,9 +1,9 @@
+/* eslint-disable func-names */
 /* eslint-disable consistent-return */
-const validateXY = require('../validation/validate-x-y');
+const validate = require('../validation/ValidateLocation');
 
-// eslint-disable-next-line func-names
 module.exports = function (req, res, next) {
-  const { error } = validateXY.validateSourceLatitudesLongitudes(req.body);
+  const { error } = validate.ValidateLocation(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
