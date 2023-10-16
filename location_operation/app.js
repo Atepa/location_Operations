@@ -18,7 +18,7 @@ app.use(rateLimit);
 
 app.use('/', routes);
 app.use('*', (req, res) => {
-  res.status(404).send('Error');
+  res.status(404).send('Invalid Url!');
 });
 app.use(globalError);
 

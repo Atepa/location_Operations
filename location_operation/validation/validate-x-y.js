@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 const Joi = require('joi');
 
 // eslint-disable-next-line func-names
