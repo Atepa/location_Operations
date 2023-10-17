@@ -24,8 +24,8 @@ module.exports = function distanceBetween2LocGetData(sourceLocation, locations) 
         id: locations[i].id,
         distance,
         locationTitle: locations[i].locationTitle,
-        locationLatitude: sourceLocationLatitude, // for example= 68 = 70  and 62 = 60
-        locationLongitude: sourceLocationLongitude, // for example= 68 = 70  and 62 = 60
+        locationLatitude: sourceLocationLatitude,
+        locationLongitude: sourceLocationLongitude,
       },
     );
   }

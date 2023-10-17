@@ -1,44 +1,41 @@
-/* eslint-disable consistent-return */
-/* eslint-disable func-names */
 require('express-async-errors');
 
 const LocationModel = require('../models/locationModel');
 const distanceMeter = require('../helpers/distanceMeter');
 const drawLoc = require('../helpers/drawRoute');
 
-exports.getAllData = async function (req, res) {
+exports.getAllData = async function functionGetAllData(req, res) {
   const locations = await LocationModel.find();
   if (!locations) {
     return res.status(400).send('There is no location!');
   }
 
-  res.send(locations);
+  return res.send(locations);
 };
 
-// eslint-disable-next-line consistent-return
-exports.getOnedata = async function (req, res) {
+exports.getOnedata = async function functionGetOnedata(req, res) {
   const { id } = req.params;
-
   const location = await LocationModel.findOne({ _id: id });
   if (!location) {
     return res.status(404).send('There is no location! Wrong Id!');
   }
-  res.send(location);
+
+  return res.send(location);
 };
 
-exports.postData = async function (req, res) {
+exports.postData = async function functionPostData(req, res) {
   const loc = new LocationModel({
     locationLatitude: req.body.locationLatitude.toFixed(4),
     locationLongitude: req.body.locationLongitude.toFixed(4),
     locationTitle: req.body.locationTitle,
     colorOfMark: req.body.colorOfMark,
   });
-
   const result = await loc.save();
+
   res.send(result);
 };
 
-exports.putData = async function (req, res) {
+exports.putData = async function functionPutData(req, res) {
   const { id } = req.params;
 
   const location = await LocationModel.findById(id);
@@ -52,10 +49,10 @@ exports.putData = async function (req, res) {
   location.colorOfMark = req.body.colorOfMark;
 
   const result = await location.save();
-  res.send(result);
+  return res.send(result);
 };
 
-exports.postDistance = async function (req, res) {
+exports.postDistance = async function functionPostDistance(req, res) {
   const locations = await LocationModel.find();
   if (!locations) {
     return res.status(400).send('There is no location!');
@@ -63,15 +60,15 @@ exports.postDistance = async function (req, res) {
   const routes = distanceMeter(req.body, locations);
   const routesObj = Object.fromEntries(routes);
 
-  res.send(routesObj);
+  return res.send(routesObj);
 };
 
-exports.postDrawRoute = async function (req, res) {
+exports.postDrawRoute = async function functionPostDrawRoute(req, res) {
   const locations = await LocationModel.find();
   if (!locations) {
     return res.status(400).send('There is no location!');
   }
-
   const routes = drawLoc(req.body, locations);
-  res.send(routes);
+
+  return res.send(routes);
 };

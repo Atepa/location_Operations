@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// eslint-disable-next-line func-names
-exports.connect = async function () {
+exports.connect = async function functionDatabase() {
   await mongoose.connect(process.env.DATABASEURL);
 };

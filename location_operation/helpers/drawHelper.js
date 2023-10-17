@@ -12,8 +12,8 @@ module.exports = function draw(sourceLocation, drawPoint) {
 
   let map = '';
 
-  for (let y = 0; y <= 36; y += 1) { // for y axis
-    for (let x = 0; x <= 18; x += 1) { // for x axis
+  for (let y = 0; y <= 36; y += 1) {
+    for (let x = 0; x <= 18; x += 1) {
       if (x === sourceLocationLongitude && y === sourceLocationLatitude) {
         map += ' C ';
       }
