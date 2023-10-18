@@ -14,16 +14,4 @@ function validateLocation(Location) {
   return Schema.validate(Location, { abortEarly: false });
 }
 
-function validateSourceXY(Location) {
-  const Schema = new Joi.object(
-    {
-      locationLatitude: Joi.number().min(-180).max(180).required()
-        .precision(4),
-      locationLongitude: Joi.number().min(-90).max(90).required()
-        .precision(4),
-    },
-  );
-  return Schema.validate(Location, { abortEarly: false });
-}
-
-module.exports = [validateLocation, validateSourceXY];
+module.exports = validateLocation;

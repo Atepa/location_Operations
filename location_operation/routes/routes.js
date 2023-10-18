@@ -8,12 +8,12 @@ router.get('/location/:id', controller.getOnedata);
 
 router.get('/location', controller.getAllData);
 
-router.post('/location', validate[0], controller.postData);
+router.post('/location', validate, controller.postData);
 
-router.post('/distance', validate[1], controller.postDistance);
+router.post('/distance', validate, controller.postDistance);
 
-router.post('/draw', validate[1], controller.postDrawRoute);
+router.post('/draw', validate, controller.postDrawRoute);
 
-router.put('/location/:id', validate[0], controller.putData);
+router.put('/location/:id', validate, controller.putData);
 
 module.exports = router;
