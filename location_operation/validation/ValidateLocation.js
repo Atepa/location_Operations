@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 function validateLocation(Location) {
-  const Schema = new Joi.object(
+  const locationSchema = new Joi.object(
     {
       locationLatitude: Joi.number().min(-180).max(180).required()
         .precision(4),
@@ -11,7 +11,7 @@ function validateLocation(Location) {
       colorOfMark: Joi.string().uppercase().pattern(/^#[A-F0-9]{6}$/).required(), // #FF FF FF -- # FF D8 02
     },
   );
-  return Schema.validate(Location, { abortEarly: false });
+  return locationSchema.validate(Location, { abortEarly: false });
 }
 
 module.exports = validateLocation;
